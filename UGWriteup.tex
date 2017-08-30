@@ -1,11 +1,8 @@
 \documentclass{article}
-<<<<<<< HEAD
-\usepackage{amsmath,amssymb,amsthm,inputenc,xcolor,graphicx,float,placeins,afterpage}
-\newcommand\tab[1][1cm]{\hspace*{#1}}
-=======
-\usepackage{amsmath,amssymb,amsthm,inputenc,xcolor}
 
->>>>>>> refs/remotes/origin/master
+\usepackage{url,amsmath,amssymb,amsthm,inputenc,xcolor,graphicx,float,placeins,afterpage}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{amsmath,amssymb,amsthm,inputenc,xcolor}
 \newcommand{\red}[1]{\textcolor{red}{[#1]}} %displays red comments
 %\newcommand{\red}[1]{}} %doesn't display comments
 
@@ -23,9 +20,9 @@
 \red{Basically wrote it to get a better understanding of all the things I have done so far}
 \red{will probably end up doing the introduction last as it is always usually the hardest part for me to write in papers}
 \vspace{5mm}
-
+\newpage
 \section{Introduction}
-For the past 15 weeks I have been working under Dr. Paul Baumann doing undergraduate research. During this time I was able to learn many different skills,programs, and mathematically techniques to help solve different Problems. Over the Winter Break for this year, I worked on learning about the Finite Element Method, and Dr. Baumann's GRINS Program, which is a Multi-Physics Finite Element package, as well as learning just how to navigate and use the linux operating system, and what github was. By the end of the winter break I was able to formulate my very own Weak from of a 1-d Isobaric Premixed laminar flame problem. For the past 7 weeks I have been working on getting to know the GRINS Framework and learning Paraview to view and understand what was going on in some of the different GRINS examples. I also started learning Latex to write things like this. Since then I have been working on modifying one of the examples to run and model Methane combustion. Alot has gone in along with this, like learning about the GRI30 model for methane combustion, as well as the different types of NASA Glenn Coefficients( 7 coefficients and 9 coefficients) and how they are used to calculate diferent Thermodynamic properties of individual chemical species. The lack of NASA 9 coefficients for a couple of species incorporated in the Methane combustion required an update to the antioch program that is used withing Grins to solve the reactions in Methane Combustion to incorporate NASA 7, During this I helped by making a file containing all of the species in Methane combustion and their NASA 7 coefficients, which were all obtained from GRI30 Thermodynamic data. This file was effentially then pulled and incorporated into the actual Antioch framework as a default file for NASA7. Along with this I had to obtain an xml file with the kinetics data as well as edit the default antioch chemical mixture data file to include the standard enthalpy of formation at 0 k for 5 or so species, which were obtained from atct.anl.gov/Thermochemical Data/version 1.118/species.
+For the past 15 weeks I have been working under Dr. Paul Bauman doing undergraduate research. During this time I was able to learn many different skills,programs, and mathematically techniques to help solve different Problems. Over the Winter Break for this year, I worked on learning about the Finite Element Method, and Dr. Bauman's GRINS Program, which is a Multi-Physics Finite Element package, as well as learning just how to navigate and use the linux operating system, and what github was. By the end of the winter break I was able to formulate my very own Weak from of a 1-d Isobaric Premixed laminar flame problem. For the past 7 weeks I have been working on getting to know the GRINS Framework and learning Paraview to view and understand what was going on in some of the different GRINS examples. I also started learning Latex to write things like this. Since then I have been working on modifying one of the examples to run and model Methane combustion. Alot has gone in along with this, like learning about the GRI30 model for methane combustion, as well as the different types of NASA Glenn Coefficients( 7 coefficients and 9 coefficients) and how they are used to calculate diferent Thermodynamic properties of individual chemical species. The lack of NASA 9 coefficients for a couple of species incorporated in the Methane combustion required an update to the antioch program that is used withing Grins to solve the reactions in Methane Combustion to incorporate NASA 7, During this I helped by making a file containing all of the species in Methane combustion and their NASA 7 coefficients, which were all obtained from GRI30 Thermodynamic data. This file was effentially then pulled and incorporated into the actual Antioch framework as a default file for NASA7. Along with this I had to obtain an xml file with the kinetics data as well as edit the default antioch chemical mixture data file to include the standard enthalpy of formation at 0 k for 5 or so species, which were obtained from atct.anl.gov/Thermochemical Data/version 1.118/species.
 
 
 
@@ -52,7 +49,7 @@ For the past 15 weeks I have been working under Dr. Paul Baumann doing undergrad
 \red{This is the start of my Weak form formulation where i spent most of the Winter Break learning basic Finite Element Method to accomplish}\\
 \vspace{5mm}
 \red{Still Need to add all of my references into this section}\\
-
+\newpage
 \section{Weak Form of a One-Dimensional Isobaric Premixed Laminar Flame}
 
 After neglecting viscous effects, body forces, radioactive heat transfer, and the diffusion of heat due to concentration gradiants, we are able to reduce the three-dimensional governing equations quite dramatically into a set of one-dimensional differential equations.
@@ -178,14 +175,20 @@ Along with the conservation of Mass equation, we also include the ideal gas law 
    &\qquad \psi(\dot{M}-\rho u) = 0 \\
     &\qquad\rho = \frac{P\bar{W}}{RT} 
     \end{align*}
-<<<<<<< HEAD
 
 
+
+
+
+
+\newpage
+\section{GRI3.0 Modeling with Grins}
+\tab Using GRINS, a Multiphysics finite element package built on libmesh, I was tesked with modeling the GRI-Mech 3.0 mechanism that models natural gas combustion, NO formation, and reburn chemistry.\red{Maybe add a section about GRINS \& ANtioch Here} The GRI mechanism contains 53 species and over \red{find actual number} 325 Reactions, Using the species data and thermodynamic data supplied by the mechanism I was able to run a 2-d example using GRINS. However, one of the first problems I ran into doing this was the lack of support GRINS had for NASA-7 coefficients, which was the format of the thermodynamic data supplied by GRI-3.0.
 \red{Add that the Nasa coefficients are fits for enthalpy,entropy, and standard heat capacity at constant pressure}
-\section{Nasa 9 \& Nasa 7 Comparison}
-\tab When Trying to run the methane combustion gri.30 example using the Grins multiphysics solver, I had ran into a problem trying to obtain the Nasa 9 coefficients for a couple of the species involved. Since Grins was only developed to parse Nasa 9 data, I needed to convert the Nasa 7 species data obtained from the GRI-Mech 3.0 into a Nasa 9 form. To do this I studied how each from was fit.
+\subsection{Nasa 9 \& Nasa 7 Comparison}
+\tab  Since Grins was only developed to parse Nasa 9 data, I had to try and find the NASA 9 data from the Nasa website itself. Some species used in the GRI-3.0 Mechanism could not be found there however, so I needed to convert the Nasa 7 species data obtained from the GRI-Mech 3.0 into a Nasa 9 form. To do this I studied how each form was fit.
 
-\subsection{Nasa Coefficients}
+\subsubsection{Nasa Coefficients}
 \tab Nasa Lewis-Glenn Coefficients, or Nasa coefficients for short, are the coefficients of a universal fitting method used for calculating the thermodynamic properties of different species at different temperatures. Storing these thermodynamic data in the form of empirical equations  allow for analytical integrations and condenses all the information on the species into just a few constants that can reproduce these data points. These coefficients were first used in 1971, where the Nasa 7 composition of these coefficients were conceptualized. This original format used 7 coefficients to caclulate the $\frac{C_p}{R}$, $\frac{H}{RT}$, $\frac{S}{R}$ as a function of temperature from a range of 300 to up to 5000K. These Nasa 7 equations are:
 \begin{align*}
  \frac{C_P}{R} =&  a_0+a_1T + a_2T^2 + a_3T^3 + a_4T^4\\
@@ -199,9 +202,12 @@ Around the turn of the century, the method used in forming these coefficients wa
   \frac{S}{R} =  -&a_0\frac{T^{-2}}{2} - a_1T^{-1} + a_2ln{T} + a_3T + a_4\frac{T^{2}}{2} + a_5\frac{T^3}{3} + a_6\frac{T^4}{4} + a_9\\
 \end{align*}
 As we see, the Nasa 7 format can be transformed into the Nasa 9 format by setting the added coefficients to 0 and moving the 7 formats coefficients to match their positions in the new format. When we do this, we have to remember the different temperature ranges these formats span. 
-\subsection{Nasa 7 vs Nasa 9}
+\subsubsection{Nasa 7 vs Nasa 9}
 To make sure that the changing of the format didn't alter the thermodynamic properties obtained from the coefficients to much, I analyzed a couple species that had both types of coefficients available. I studied them plotted together at different temperatures as well as the linear interpolation of Nasa 7 after it reached its max temperature range agains the Nasa 9 fits. The plots were obtained for the species HCO and are plotted below:
-\begin{figure}
+\red{Better align Graphs}
+
+
+\begin{figure}[!bp]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/Cp1.png}
   \label{fig:cp1}
@@ -210,7 +216,7 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/Cp2.png}
   \label{fig:cp2}
@@ -218,21 +224,21 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/Cp3.png}
   \label{fig:cp3}
   \caption{HCO comparison of Nasa 7 vs Nasa 9 data}
 \end{figure}
 
- \begin{figure}
+ \begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/CpT.png}
   \label{fig:cpT}
   \caption{HCO comparison of Nasa 7 vs Nasa 9 data, along with linearly interpolated data for data outside of Nasa 7's range for $\frac{C_p}{R}$ data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/H1.png}
   \label{fig:H1}
@@ -240,7 +246,7 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/H2.png}
   \label{fig:H2}
@@ -248,14 +254,14 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/H3.png}
   \label{fig:H3}
   \caption{HCO comparison of Nasa 7 vs Nasa 9 data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/HT.png}
   \label{fig:HT}
@@ -263,7 +269,7 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/S1.png}
   \label{fig:s1}
@@ -271,7 +277,7 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/S2.png}
   \label{fig:S2}
@@ -279,7 +285,7 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!p]
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/S3.png}
   \label{fig:S3}
@@ -290,15 +296,22 @@ To make sure that the changing of the format didn't alter the thermodynamic prop
   \centering
   \includegraphics[width=.8\linewidth]{./NasaPlots/ST.png}
   \label{fig:sT}
-  \caption{HCO comparison of Nasa 7 vs Nasa 9 data, along with linearly interpolated data for data outside of Nasa 7's range for $\frac{S}{R} data$}
+  \caption{HCO comparison of Nasa 7 vs Nasa 9 data, along with linearly interpolated data for data outside of Nasa 7's range for $\frac{S}{R}$ data}
 \end{figure}
 
+\newpage
+
+
+%Starting Bibliography
+\bibliographystyle{plain}
+\bibliography{CEAS,NASAbib}
+
+
+\nocite{*}
+
 \end{document}
 
 
 
 
 
-=======
-\end{document}
->>>>>>> refs/remotes/origin/master
